@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+
+<html>
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Fisheye - photographe</title>
+  </head>
+  <body>
+    <header>
+      <a href="/index.html">
+        <img src="assets/images/logo.png" class="logo" alt="Fish eye logo" />
+      </a>
+    </header>
+    <main id="main">
+      <div class="photograph-header"></div>
+      <div class="selector">
+        <span>Trier par :</span> 
+        <div class="select" >
+          <div class="options" id="options">
+            <div class="hide-option option" id="hide-option">Select  <i class="fa fa-caret-down"></i></div>
+        </div>
+          <select id="mySelect" style="display: none;">
+            <option value="1" selected>Popularité</option>
+            <option value="2">Date</option>
+            <option value="3">Titre</option>
+
+          </select>
+        </div>
+      </div>
+      <div id="mainContent" class="photograph-main byLikes"></div>
+      <div class="photograph-info"></div>
+      <div class="preview-box"> <div class="close"><i class="fa-solid fa-x fa-2xl "></i></div>
+      
+      <div class="image-box">
+        
+        <div class="slide prev">
+          <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        <div class="slide next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </div>
+         <img src="" alt="" class="img">
+         <video src="" class="video"></video>
+     
+      
+      </div>
+     
+    </main>
+    <div id="contact_modal"></div>
+    <script src="/scripts/utils/Lightbox.js"></script>
+    <script src="/scripts/factories/photographer.js"></script>
+    <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
+  </body>
+</html>
