@@ -1,3 +1,7 @@
+/* eslint-disable no-multi-assign */
+/* eslint-disable func-names */
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
 function photographerFactory(data) {
   const { id, name, portrait, city, country, tagline, price } = data
 
@@ -9,7 +13,7 @@ function photographerFactory(data) {
     const article = document.createElement('article')
     const img = document.createElement('img')
     img.setAttribute('src', picture)
-    img.setAttribute('alt', 'Photo de profil')
+    img.setAttribute('alt', name)
     const h2 = document.createElement('h2')
     h2.textContent = name
     const h3 = document.createElement('h3')
@@ -163,9 +167,8 @@ function modalFactory(data) {
     // Header
     const header = document.createElement('header')
     const h2 = document.createElement('h2')
-    h2.textContent = 'Contactez-moi'
-    const photographName = document.createElement('h2')
-    photographName.textContent = name
+    h2.setAttribute('style', 'text-align: left')
+    h2.textContent = `Contactez-moi ${name}`
     const img = document.createElement('img')
     img.setAttribute('src', 'assets/icons/close.svg')
     img.setAttribute('onclick', 'closeModal()')
@@ -173,6 +176,9 @@ function modalFactory(data) {
     // form
     const form = document.createElement('form')
     const fieldset = document.createElement('fieldset')
+    const legend = document.createElement('legend')
+    legend.textContent = `Contactez-moi ${name}`
+    legend.setAttribute('style', 'display:none')
     // name
     const firstnameLabel = document.createElement('label')
     firstnameLabel.textContent = 'Prénom'
@@ -180,6 +186,7 @@ function modalFactory(data) {
     firstnameInput.setAttribute('type', 'text')
     firstnameInput.setAttribute('autocomplete', 'firstname')
     firstnameInput.setAttribute('aria-required', 'true')
+    firstnameInput.setAttribute('id', 'firstname')
     // lastname
     const lastnameLabel = document.createElement('label')
     lastnameLabel.textContent = 'Nom'
@@ -187,6 +194,7 @@ function modalFactory(data) {
     lastnameInput.setAttribute('type', 'text')
     lastnameInput.setAttribute('autocomplete', 'lastname')
     lastnameInput.setAttribute('aria-required', 'true')
+    lastnameInput.setAttribute('id', 'lastname')
     // mail
     const mailLabel = document.createElement('label')
     mailLabel.textContent = 'Email'
@@ -194,23 +202,25 @@ function modalFactory(data) {
     mailInput.setAttribute('type', 'mail')
     mailInput.setAttribute('autocomplete', 'mail')
     mailInput.setAttribute('aria-required', 'true')
+    mailInput.setAttribute('id', 'mail')
     // message
     const messageLabel = document.createElement('label')
     messageLabel.textContent = 'Votre Message'
     const messageInput = document.createElement('textarea')
     messageInput.setAttribute('autocomplete', 'message')
     messageInput.setAttribute('aria-required', 'true')
+    messageInput.setAttribute('id', 'message')
     // btn
-    const btn = document.createElement('button')
+    const btn = document.createElement('input')
     btn.setAttribute('class', 'contact_button')
-    btn.textContent = 'Envoyer'
+    btn.setAttribute('value', 'Envoyer')
+    btn.setAttribute('type', 'submit')
 
     modal.appendChild(header)
     modal.appendChild(form)
 
     header.appendChild(h2)
 
-    header.appendChild(photographName)
     header.appendChild(img)
 
     form.appendChild(fieldset)
@@ -219,6 +229,7 @@ function modalFactory(data) {
     fieldset.appendChild(lastnameLabel)
     fieldset.appendChild(mailLabel)
     fieldset.appendChild(messageLabel)
+    fieldset.appendChild(legend)
 
     firstnameLabel.appendChild(firstnameInput)
     lastnameLabel.appendChild(lastnameInput)

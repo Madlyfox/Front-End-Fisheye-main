@@ -50,7 +50,7 @@
   margin-left: 99px;
   margin-top: 50px;
   display: flex;
-  z-index: 2;
+
   justify-content: space-between;
   align-items: center;
   width: 200px;
@@ -58,7 +58,6 @@
 }
 .select {
   position: relative;
-  z-index: 2;
 }
 
 .options {
@@ -69,9 +68,9 @@
   width: 150px;
   min-height: 60px;
   max-height: 300px;
-  border-radius: 15px;
-  background-color: rgb(250, 250, 250);
-  box-shadow: 2px 4px 8px #c5c5c5;
+  border-radius: 5px;
+  background-color: #901c1c;
+  color: white;
   transition: all 300ms;
 }
 
@@ -86,10 +85,11 @@
   justify-content: space-evenly;
   align-items: center;
   transition: all 300ms;
+  border-top: 1px solid white;
 }
 
 .option:nth-child(1) {
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .option:hover {
@@ -193,7 +193,7 @@ a video {
   top: 5%;
   border-radius: 5px;
   background-color: #db8876;
-  width: 30%;
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -216,7 +216,8 @@ a video {
   top: 25px;
   right: 25px;
   cursor: pointer;
-  scale: 0.7;
+  height: 30px;
+  width: 30px;
 }
 
 .modal header h2 {
@@ -340,9 +341,16 @@ form fieldset label textarea {
   opacity: 0.5;
   z-index: 1;
 }
-.video {
-  display: none;
+#inside video {
+  width: 700px;
+  height: 600px;
+}
+#inside {
   width: 100%;
   height: 100%;
-  object-fit: center;
+}
+select {
+  appearance: none;
+  width: 100px;
+  padding: 10px;
 }
