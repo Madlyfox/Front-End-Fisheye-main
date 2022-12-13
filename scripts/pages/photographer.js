@@ -1,6 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-undef */
-/* eslint-disable eqeqeq */
 const queryStringUrlId = window.location.search
 
 // ID EXTRACTION
@@ -49,7 +46,7 @@ async function getMedia() {
 
 function sortMedia(medias, sortBy) {
   mainSection.innerHTML = ''
-  if (sortBy == 1) {
+  if (sortBy === '1') {
     medias.sort((a, b) => (a.likes < b.likes ? 1 : -1))
     medias.forEach((media) => {
       const mainModel = mediaFactory(media)
@@ -57,16 +54,16 @@ function sortMedia(medias, sortBy) {
       mainSection.appendChild(userMediaDOM)
     })
   }
-  if (sortBy == 2) {
+  if (sortBy === '2') {
     medias.map((obj) => ({ obj, date: new Date(obj.date) }))
-    medias.sort((a, b) => b.date - a.date)
+    medias.sort((a, b) => Number(b.date) - Number(a.date))
     medias.forEach((media) => {
       const mainModel = mediaFactory(media)
       const userMediaDOM = mainModel.getUserMediaDOM()
       mainSection.appendChild(userMediaDOM)
     })
   }
-  if (sortBy == 3) {
+  if (sortBy === '3') {
     medias.sort((a, b) => a.title.localeCompare(b.title))
     medias.forEach((media) => {
       const mainModel = mediaFactory(media)
@@ -88,61 +85,80 @@ async function displayMedia(medias) {
   })
 
   // LightBox
-  const mediaCard = document.querySelectorAll('.media')
-
-  const previewBox = document.querySelector('.preview-box')
+  const mediaCard = document.querySelectorAll('.card')
+  const insider = document.getElementById('inside')
+  const previewBox = document.getElementById('lightbox')
   const closePreview = document.querySelector('.close')
+
+  const prevBtn = document.querySelector('.prev')
+  const nextBtn = document.querySelector('.next')
 
   for (let i = 0; i < mediaCard.length; i++) {
     let newIndex = i
+    insider.innerHTML = ''
 
-    mediaCard[i].onclick = () => {
+    mediaCard[newIndex].onclick = () => {
+      if (newIndex === 0) {
+        prevBtn.style.display = 'none'
+      }
+      if (newIndex === mediaCard.length - 1) {
+        nextBtn.style.display = 'none'
+      }
+
       function preview() {
-        const insider = document.getElementById('inside')
-        const selectedImgUrl = mediaCard[newIndex].src
-        insider.innerHTML = ''
-        console.log(mediaCard[newIndex])
-        if (mediaCard[newIndex].tagName === 'VIDEO') {
-          const video = document.createElement('video')
-          video.autoplay = true
-          video.controls = true
-          video.muted = false
-          video.src = selectedImgUrl
-
-          insider.appendChild(video)
-        }
-        if (mediaCard[newIndex].tagName === 'IMG') {
-          const img = document.createElement('img')
-          img.autoplay = true
-          img.controls = true
-          img.muted = false
-          img.src = selectedImgUrl
-
-          insider.appendChild(img)
-        }
+        insider.innerHTML = mediaCard[newIndex].innerHTML
       }
       // Next Prev
-      const prevBtn = document.querySelector('.prev')
-      const nextBtn = document.querySelector('.next')
 
       prevBtn.onclick = () => {
         newIndex -= 1 // decrement newIndexvalue
-
+        insider.innerHTML = mediaCard[newIndex].innerHTML
         if (newIndex === 0) {
-          prevBtn.style.dislpay = 'none'
+          prevBtn.style.display = 'none'
         } else {
-          preview()
+          nextBtn.style.display = 'block'
         }
       }
       nextBtn.onclick = () => {
         newIndex += 1 // increment newIndexvalue
+        insider.innerHTML = mediaCard[newIndex].innerHTML
 
-        if (newIndex == 0) {
-          nextBtn.style.dislpay = 'none'
+        if (newIndex === mediaCard.length - 1) {
+          nextBtn.style.display = 'none'
         } else {
-          preview()
+          prevBtn.style.display = 'block'
         }
       }
+      window.addEventListener('keydown', (e) => {
+        switch (e.key) {
+          case 'ArrowLeft':
+            newIndex -= 1 // decrement newIndexvalue
+            insider.innerHTML = mediaCard[newIndex].innerHTML
+            if (newIndex === 0) {
+              prevBtn.style.display = 'none'
+            } else {
+              nextBtn.style.display = 'block'
+            }
+            break
+          case 'ArrowRight':
+            newIndex += 1 // increment newIndexvalue
+            insider.innerHTML = mediaCard[newIndex].innerHTML
+
+            if (newIndex === mediaCard.length - 1) {
+              nextBtn.style.display = 'none'
+            } else {
+              prevBtn.style.display = 'block'
+            }
+            break
+          case 'Escape':
+            previewBox.classList.remove('show')
+            break
+          default:
+        }
+
+        // Annuler l'action par défaut pour éviter qu'elle ne soit traitée deux fois.
+        e.preventDefault()
+      })
 
       closePreview.onclick = () => {
         previewBox.classList.remove('show')
@@ -152,11 +168,6 @@ async function displayMedia(medias) {
       previewBox.classList.add('show')
     }
   }
-  previewBox.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      previewBox.classList.remove('show')
-    }
-  })
 }
 
 // Get Likes
@@ -165,7 +176,6 @@ async function getLikes(medias) {
     .map((item) => item.likes)
     .reduce((prev, curr) => prev + curr, 0)
   const price = medias.map((item) => item.price)
-  console.log(price)
   return {
     likesCount,
     price,

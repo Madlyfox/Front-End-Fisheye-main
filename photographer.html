@@ -28,15 +28,14 @@
       <div class="selector">
         <span>Trier par :</span>
         <div class="select">
-          <div
-            class="options"
-            id="options"
-            aria-expanded="false"
-            tabindex="0"
-            role="navigation"
-          >
-            <div class="hide-option option" id="hide-option">
-              Select <i class="fa fa-caret-down"></i>
+          <div class="dropdown">
+            <button onclick="showDropdown()" class="dropbtn"></button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#main" id="optionPop" onclick="setValue(1)"
+                >Popularité</a
+              >
+              <a href="#main" id="optionDat" onclick="setValue(2)">Date</a>
+              <a href="#main" id="optionTit" onclick="setValue(3)">Titre</a>
             </div>
           </div>
           <select aria-label="select" id="mySelect" style="display: none">
@@ -48,7 +47,7 @@
       </div>
       <div id="mainContent" class="photograph-main byLikes"></div>
       <div class="photograph-info"></div>
-      <div class="preview-box">
+      <div class="preview-box" id="lightbox">
         <div class="close">
           <i class="fa-solid fa-x fa-2xl"></i>
         </div>

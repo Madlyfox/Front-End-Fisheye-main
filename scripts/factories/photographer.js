@@ -85,14 +85,13 @@ function mediaFactory(data) {
     const card = document.createElement('a')
     card.setAttribute('class', 'card')
     card.setAttribute('data-id', id)
-
+    card.setAttribute('tabindex', 0)
     if (image) {
       const img = document.createElement('img')
       img.setAttribute('src', imgSrc)
       img.setAttribute('class', 'image')
       img.setAttribute('alt', title)
       img.classList.add('media')
-      img.setAttribute('tabindex', '0 ')
       card.appendChild(img)
     }
     if (video) {
@@ -164,6 +163,7 @@ function modalFactory(data) {
   function getUserModalDOM() {
     const modal = document.createElement('div')
     modal.setAttribute('class', 'modal')
+    modal.setAttribute('id', 'modal')
     // Header
     const header = document.createElement('header')
     const h2 = document.createElement('h2')
@@ -173,6 +173,7 @@ function modalFactory(data) {
     img.setAttribute('src', 'assets/icons/close.svg')
     img.setAttribute('onclick', 'closeModal()')
     img.setAttribute('alt', 'close')
+
     // form
     const form = document.createElement('form')
     const fieldset = document.createElement('fieldset')
