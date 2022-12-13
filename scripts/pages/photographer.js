@@ -55,12 +55,19 @@ function sortMedia(medias, sortBy) {
     })
   }
   if (sortBy === '2') {
-    medias.map((obj) => ({ obj, date: new Date(obj.date) }))
-    medias.sort((a, b) => Number(b.date) - Number(a.date))
+    medias.sort((x, y) => {
+      const firstDate = new Date(x.date)
+      const SecondDate = new Date(y.date)
+
+      if (firstDate < SecondDate) return -1
+      if (firstDate > SecondDate) return 1
+      return 0
+    })
     medias.forEach((media) => {
       const mainModel = mediaFactory(media)
       const userMediaDOM = mainModel.getUserMediaDOM()
       mainSection.appendChild(userMediaDOM)
+      console.log(media)
     })
   }
   if (sortBy === '3') {
@@ -98,7 +105,7 @@ async function displayMedia(medias) {
     insider.innerHTML = ''
 
     mediaCard[newIndex].onclick = () => {
-      if (newIndex === 0) {
+      if (newIndex === '0') {
         prevBtn.style.display = 'none'
       }
       if (newIndex === mediaCard.length - 1) {
