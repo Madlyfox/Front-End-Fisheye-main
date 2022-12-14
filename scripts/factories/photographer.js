@@ -117,6 +117,7 @@ function mediaFactory(data) {
     p.innerHTML = likes
     const heart = document.createElement('i')
     heart.setAttribute('class', 'far fa-heart')
+    heart.setAttribute('tabIndex', '0')
 
     heart.onclick = function () {
       if (p.classList.contains('liked')) {
@@ -129,6 +130,23 @@ function mediaFactory(data) {
         p.innerHTML = likes += 1
       }
     }
+    heart.addEventListener('keypress', (e) => {
+      switch (e.key) {
+        case 'Enter':
+          if (p.classList.contains('liked')) {
+            p.classList.remove('liked')
+            heart.classList.remove('liked')
+            p.innerHTML = likes -= 1
+          } else {
+            p.classList.add('liked')
+            heart.classList.add('liked')
+            p.innerHTML = likes += 1
+          }
+          break
+
+        default:
+      }
+    })
 
     card.appendChild(cardFooter)
     cardFooter.appendChild(h3)
