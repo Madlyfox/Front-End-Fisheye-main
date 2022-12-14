@@ -277,6 +277,12 @@ form fieldset label textarea {
   object-fit: cover;
   border-radius: 5px;
 }
+#inside video {
+  width: 100%;
+  height: 650px;
+  object-fit: cover;
+  border-radius: 5px;
+}
 
 .preview-box.show {
   opacity: 1;

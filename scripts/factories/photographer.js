@@ -100,7 +100,7 @@ function mediaFactory(data) {
       video.setAttribute('type', 'video/mp4')
       video.setAttribute('alt', title)
       video.autoplay = false
-      video.controls = false
+      video.controls = true
       video.muted = false
       video.classList.add('media')
       card.appendChild(video)
@@ -119,7 +119,7 @@ function mediaFactory(data) {
     heart.setAttribute('class', 'far fa-heart')
     heart.setAttribute('tabIndex', '0')
 
-    heart.onclick = function () {
+    heart.addEventListener('click', () => {
       if (p.classList.contains('liked')) {
         p.classList.remove('liked')
         heart.classList.remove('liked')
@@ -129,7 +129,8 @@ function mediaFactory(data) {
         heart.classList.add('liked')
         p.innerHTML = likes += 1
       }
-    }
+    })
+
     heart.addEventListener('keypress', (e) => {
       switch (e.key) {
         case 'Enter':
