@@ -164,7 +164,7 @@ function mediaFactory(data) {
   return { title, likes, getUserMediaDOM }
 }
 function infoFactory(data) {
-  const { likesCount, price } = data
+  const likesCount = data
   function getUserInfoDOM() {
     const info = document.createElement('div')
     const likes = document.createElement('p')
