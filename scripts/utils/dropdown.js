@@ -1,10 +1,13 @@
+/* eslint-disable no-unused-vars */
+
 const dropdown = document.getElementById('myDropdown')
 const btn = document.querySelector('.dropbtn')
-
 const optionList = dropdown.querySelectorAll('a')
-
 const select = document.querySelector('select')
+const chevron = document.createElement('i')
+chevron.setAttribute('class', 'fa-solid fa-chevron-down')
 
+// binding invisible select on dropdown
 function selectValue() {
   const e = new Event('change')
 
@@ -35,29 +38,33 @@ function selectValue() {
     const selected = document.getElementById('optionTit')
     selected.style.display = 'block'
   }
+  btn.appendChild(chevron)
 }
 selectValue()
 
+// utils functions
 function setValue(e) {
   select.value = e
-  console.log(select.value)
 
   selectValue()
 }
 
 function showDropdown() {
   dropdown.classList.toggle('show')
+  chevron.classList.remove('fa-chevron-down')
+  chevron.classList.add('fa-chevron-up')
 }
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function (event) {
+window.onclick = (event) => {
   if (!event.target.matches('.dropbtn')) {
     const dropdowns = document.getElementsByClassName('dropdown-content')
     let i
-    for (i = 0; i < dropdowns.length; i++) {
+    for (i = 0; i < dropdowns.length; i += 1) {
       const openDropdown = dropdowns[i]
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show')
+        chevron.setAttribute('class', 'fa-solid fa-chevron-down')
       }
     }
   }

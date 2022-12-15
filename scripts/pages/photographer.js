@@ -1,3 +1,6 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-undef */
+
 const queryStringUrlId = window.location.search
 
 // ID EXTRACTION
@@ -14,7 +17,7 @@ async function getPhotographer() {
   const data = await response.json()
 
   const photographer = data.photographers
-  const photographerById = photographer.find((element) => element.id == id)
+  const photographerById = photographer.find((e) => e.id == id)
 
   return {
     photographerById,
@@ -28,7 +31,7 @@ async function displayData(photographerById) {
   const userHeaderDOM = headerModel.getUserHeaderDOM()
   headerSection.appendChild(userHeaderDOM)
 }
-// Get Media
+// Get Media from id
 
 async function getMedia() {
   const response = await fetch(dataJson)
@@ -67,7 +70,6 @@ function sortMedia(medias, sortBy) {
       const mainModel = mediaFactory(media)
       const userMediaDOM = mainModel.getUserMediaDOM()
       mainSection.appendChild(userMediaDOM)
-      console.log(media)
     })
   }
   if (sortBy === '3') {
@@ -79,7 +81,7 @@ function sortMedia(medias, sortBy) {
     })
   }
 }
-// Display Media
+// Display Sorted Media
 
 async function displayMedia(medias) {
   const sortBy = document.querySelector('select')
@@ -180,7 +182,7 @@ async function displayMedia(medias) {
   }
 }
 
-// Get Likes
+// Get total Likes
 async function getLikes(medias) {
   const likesCount = medias
     .map((item) => item.likes)
@@ -209,9 +211,8 @@ async function displayUserModal(photographerById) {
   const userModalDOM = modalModel.getUserModalDOM()
   modalSection.appendChild(userModalDOM)
 }
-
+// Initialisation
 async function init() {
-  // Récupère les datas des photographes
   const { photographerById } = await getPhotographer()
   const { medias } = await getMedia()
   const { likesCount } = await getLikes(medias)

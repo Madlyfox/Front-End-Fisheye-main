@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+
+// index factory
 function profilFactory(data) {
   const { name, portrait, city, country, tagline } = data
 

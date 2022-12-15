@@ -53,7 +53,7 @@
 
   justify-content: space-between;
   align-items: center;
-  width: 250px;
+  width: 220px;
   max-height: 100px;
 }
 
@@ -325,10 +325,19 @@ select {
   padding: 16px;
   font-size: 16px;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: none;
-  width: 150px;
+  width: 130px;
   cursor: pointer;
   text-align: left;
+}
+.dropbtn p {
+  margin: 0;
+}
+.dropbtn i {
+  scale: 70%;
 }
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
@@ -344,7 +353,7 @@ select {
   background-color: #901c1c;
   color: white;
 
-  width: 150px;
+  width: 130px;
   margin-top: -5px;
   padding-bottom: 5px;
   border-radius: 5px;
@@ -363,7 +372,7 @@ select {
   color: white;
   border-top: 1px solid white;
   width: 100px;
-  padding: 12px 16px;
+  padding: 12px 5px;
   text-decoration: none;
 }
 

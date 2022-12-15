@@ -1,7 +1,7 @@
 /* eslint-disable no-multi-assign */
-/* eslint-disable func-names */
-/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
+
+// All factories
 function photographerFactory(data) {
   const { id, name, portrait, city, country, tagline, price } = data
 
@@ -96,16 +96,16 @@ function mediaFactory(data) {
       card.appendChild(img)
     }
     if (video) {
-      const video = document.createElement('video')
-      video.setAttribute('src', vdoSrc)
-      video.setAttribute('type', 'video/mp4')
-      video.setAttribute('alt', title)
-      video.autoplay = false
-      video.controls = true
-      video.muted = false
-      video.classList.add('media')
-      video.setAttribute('tabindex', 0)
-      card.appendChild(video)
+      const vdo = document.createElement('video')
+      vdo.setAttribute('src', vdoSrc)
+      vdo.setAttribute('type', 'video/mp4')
+      vdo.setAttribute('alt', title)
+      vdo.autoplay = false
+      vdo.controls = true
+      vdo.muted = false
+      vdo.classList.add('media')
+      vdo.setAttribute('tabindex', 0)
+      card.appendChild(vdo)
     }
     const cardFooter = document.createElement('div')
     cardFooter.setAttribute('class', 'card_footer')
@@ -164,17 +164,16 @@ function mediaFactory(data) {
   return { title, likes, getUserMediaDOM }
 }
 function infoFactory(data) {
-  const likesCount = data
-  const price = data
+  const { likesCount, price } = data
   function getUserInfoDOM() {
     const info = document.createElement('div')
     const likes = document.createElement('p')
-    const price = document.createElement('p')
+    const p = document.createElement('p')
 
     likes.innerHTML = `${likesCount}    <i class="fa-solid fa-heart"></i>`
 
     info.appendChild(likes)
-    info.appendChild(price)
+    info.appendChild(p)
     return info
   }
 
