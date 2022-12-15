@@ -287,7 +287,6 @@ form fieldset label textarea {
   opacity: 1;
 
   display: flex;
-  pointer-events: auto;
 }
 .slide {
   position: absolute;
