@@ -100,80 +100,83 @@ async function displayMedia(medias) {
   const prevBtn = document.querySelector('.prev')
   const nextBtn = document.querySelector('.next')
 
-  for (let i = 0; i < mediaCard.length; i++) {
+  closePreview.onclick = () => {
+    previewBox.classList.remove('show')
+  }
+
+  for (let i = 0; i < mediaCard.length; i += 1) {
     let newIndex = i
     insider.innerHTML = ''
 
-    mediaCard[newIndex].onclick = () => {
-      if (newIndex === '0') {
+    mediaCard[newIndex].firstChild.onclick = () => {
+      if (newIndex <= 0) {
         prevBtn.style.display = 'none'
+      } else {
+        prevBtn.style.display = 'block'
       }
       if (newIndex === mediaCard.length - 1) {
         nextBtn.style.display = 'none'
       }
-
       function preview() {
         insider.innerHTML = mediaCard[newIndex].innerHTML
       }
-      // Next Prev
+      function lightboxControl() {
+        window.addEventListener('keydown', (e) => {
+          switch (e.key) {
+            case 'ArrowLeft':
+              if (newIndex === 0) {
+                prevBtn.style.display = 'none'
+              } else {
+                prevBtn.style.display = 'block'
+                newIndex -= 1 // decrement newIndexvalue
+                insider.innerHTML = mediaCard[newIndex].innerHTML
+              }
+              break
+            case 'ArrowRight':
+              if (newIndex === mediaCard.length - 1) {
+                nextBtn.style.display = 'none'
+              } else {
+                prevBtn.style.display = 'block'
+                newIndex += 1 // increment newIndexvalue
+                insider.innerHTML = mediaCard[newIndex].innerHTML
+              }
+              break
+            case 'Escape':
+              previewBox.classList.remove('show')
+              break
+            default:
+          }
 
+          // Annuler l'action par défaut pour éviter qu'elle ne soit traitée deux fois.
+        })
+      }
       prevBtn.onclick = () => {
-        newIndex -= 1 // decrement newIndexvalue
-        insider.innerHTML = mediaCard[newIndex].innerHTML
         if (newIndex === 0) {
           prevBtn.style.display = 'none'
         } else {
           nextBtn.style.display = 'block'
+          newIndex -= 1 // decrement newIndexvalue
+          preview()
         }
       }
       nextBtn.onclick = () => {
-        newIndex += 1 // increment newIndexvalue
-        insider.innerHTML = mediaCard[newIndex].innerHTML
-
         if (newIndex === mediaCard.length - 1) {
           nextBtn.style.display = 'none'
         } else {
           prevBtn.style.display = 'block'
+          newIndex += 1 // increment newIndexvalue
+          preview()
         }
       }
-      window.addEventListener('keydown', (e) => {
-        switch (e.key) {
-          case 'ArrowLeft':
-            newIndex -= 1 // decrement newIndexvalue
-            insider.innerHTML = mediaCard[newIndex].innerHTML
-            if (newIndex === 0) {
-              prevBtn.style.display = 'none'
-            } else {
-              nextBtn.style.display = 'block'
-            }
-            break
-          case 'ArrowRight':
-            newIndex += 1 // increment newIndexvalue
-            insider.innerHTML = mediaCard[newIndex].innerHTML
-
-            if (newIndex === mediaCard.length - 1) {
-              nextBtn.style.display = 'none'
-            } else {
-              prevBtn.style.display = 'block'
-            }
-            break
-          case 'Escape':
-            previewBox.classList.remove('show')
-            break
-          default:
-        }
-
-        // Annuler l'action par défaut pour éviter qu'elle ne soit traitée deux fois.
-        e.preventDefault()
-      })
-
-      closePreview.onclick = () => {
-        previewBox.classList.remove('show')
-      }
-
+      lightboxControl()
       preview()
       previewBox.classList.add('show')
     }
+    mediaCard[newIndex].firstChild.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        mediaCard[newIndex].firstChild.click()
+      }
+    })
   }
 }
 

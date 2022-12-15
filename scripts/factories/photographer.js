@@ -85,13 +85,14 @@ function mediaFactory(data) {
     const card = document.createElement('a')
     card.setAttribute('class', 'card')
     card.setAttribute('data-id', id)
-    card.setAttribute('tabindex', 0)
+
     if (image) {
       const img = document.createElement('img')
       img.setAttribute('src', imgSrc)
       img.setAttribute('class', 'image')
       img.setAttribute('alt', title)
       img.classList.add('media')
+      img.setAttribute('tabindex', 0)
       card.appendChild(img)
     }
     if (video) {
@@ -103,6 +104,7 @@ function mediaFactory(data) {
       video.controls = true
       video.muted = false
       video.classList.add('media')
+      video.setAttribute('tabindex', 0)
       card.appendChild(video)
     }
     const cardFooter = document.createElement('div')
@@ -119,7 +121,7 @@ function mediaFactory(data) {
     heart.setAttribute('class', 'far fa-heart')
     heart.setAttribute('tabIndex', '0')
 
-    heart.addEventListener('click', () => {
+    heart.addEventListener('click', (e) => {
       if (p.classList.contains('liked')) {
         p.classList.remove('liked')
         heart.classList.remove('liked')
@@ -146,6 +148,7 @@ function mediaFactory(data) {
           break
 
         default:
+          e.preventDefault()
       }
     })
 
@@ -183,6 +186,7 @@ function modalFactory(data) {
     const modal = document.createElement('div')
     modal.setAttribute('class', 'modal')
     modal.setAttribute('id', 'modal')
+    modal.setAttribute('tabIndex', '12')
     // Header
     const header = document.createElement('header')
     const h2 = document.createElement('h2')

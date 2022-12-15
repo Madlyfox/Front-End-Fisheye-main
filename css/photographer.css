@@ -150,11 +150,10 @@ a video {
   left: 0;
   background: rgba(255, 255, 255, 0.542);
 
-  z-index: 1;
+  z-index: 0;
   width: 100%;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
 }
 .modal {
   position: relative;
