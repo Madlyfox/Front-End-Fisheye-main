@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 const modal = document.getElementById('contact_modal')
 
 // utils functions

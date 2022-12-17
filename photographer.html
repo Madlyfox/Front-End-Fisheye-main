@@ -30,7 +30,7 @@
         <div class="select">
           <div class="dropdown">
             <button onclick="showDropdown()" class="dropbtn">
-              <i class="fa-solid fa-chevron-down"></i>
+              <em class="fa-solid fa-chevron-down"></em>
             </button>
             <div id="myDropdown" class="dropdown-content">
               <a href="#main" id="optionPop" onclick="setValue(1)"
@@ -40,7 +40,9 @@
               <a href="#main" id="optionTit" onclick="setValue(3)">Titre</a>
             </div>
           </div>
+
           <select aria-label="select" id="mySelect" style="display: none">
+            <label for="mySelect">select</label>
             <option value="1" selected>Popularité</option>
             <option value="2">Date</option>
             <option value="3">Titre</option>
@@ -51,15 +53,15 @@
       <div class="photograph-info"></div>
       <div class="preview-box" id="lightbox">
         <div class="close">
-          <i class="fa-solid fa-x fa-2xl"></i>
+          <em class="fa-solid fa-x fa-2xl"></em>
         </div>
         <div class="image-box">
           <div class="slide prev">
-            <i class="fa-solid fa-chevron-left"></i>
+            <em class="fa-solid fa-chevron-left"></em>
           </div>
           <div id="inside"></div>
           <div class="slide next">
-            <i class="fa-solid fa-chevron-right"></i>
+            <em class="fa-solid fa-chevron-right"></em>
           </div>
         </div>
       </div>

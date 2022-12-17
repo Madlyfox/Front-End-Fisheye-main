@@ -1,6 +1,3 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable no-undef */
-
 const queryStringUrlId = window.location.search
 
 // ID EXTRACTION
@@ -17,7 +14,8 @@ async function getPhotographer() {
   const data = await response.json()
 
   const photographer = data.photographers
-  const photographerById = photographer.find((e) => e.id == id)
+
+  const photographerById = photographer.find((e) => e.id === Number(id))
 
   return {
     photographerById,
@@ -38,7 +36,9 @@ async function getMedia() {
   const data = await response.json()
 
   const mediaList = data.media
-  const medias = mediaList.filter((element) => element.photographerId == id)
+  const medias = mediaList.filter(
+    (element) => element.photographerId === Number(id)
+  )
 
   return {
     medias,
@@ -101,11 +101,11 @@ async function displayMedia(medias) {
 
   const prevBtn = document.querySelector('.prev')
   const nextBtn = document.querySelector('.next')
-
+  // close lightbox
   closePreview.onclick = () => {
     previewBox.classList.remove('show')
   }
-
+  // lightbox launcher
   for (let i = 0; i < mediaCard.length; i += 1) {
     let newIndex = i
     insider.innerHTML = ''

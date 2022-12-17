@@ -1,6 +1,3 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable no-unused-vars */
-
 // All factories
 function photographerFactory(data) {
   const { id, name, portrait, city, country, tagline, price } = data
@@ -75,7 +72,7 @@ function profilFactory(data) {
 }
 function mediaFactory(data) {
   const { id, photographerId, title, image, video, date, price } = data
-  let { likes } = data
+  const { likes } = data
   const imgSrc = `assets/photos/${photographerId}/${image}`
   const vdoSrc = `assets/photos/${photographerId}/${video}`
 
@@ -125,11 +122,12 @@ function mediaFactory(data) {
       if (p.classList.contains('liked')) {
         p.classList.remove('liked')
         heart.classList.remove('liked')
-        p.innerHTML = likes -= 1
+
+        p.innerHTML = likes - 1
       } else {
         p.classList.add('liked')
         heart.classList.add('liked')
-        p.innerHTML = likes += 1
+        p.innerHTML = likes + 1
       }
     })
 
@@ -139,11 +137,11 @@ function mediaFactory(data) {
           if (p.classList.contains('liked')) {
             p.classList.remove('liked')
             heart.classList.remove('liked')
-            p.innerHTML = likes -= 1
+            p.innerHTML = likes - 1
           } else {
             p.classList.add('liked')
             heart.classList.add('liked')
-            p.innerHTML = likes += 1
+            p.innerHTML = likes + 1
           }
           break
 
@@ -169,6 +167,15 @@ function infoFactory(data) {
     const info = document.createElement('div')
     const likes = document.createElement('p')
     const p = document.createElement('p')
+    const content = document.querySelectorAll('.fa-heart')
+    content.forEach((e) => {
+      e.addEventListener('click', () => {
+        const likedContent = document.querySelectorAll('.fa-heart.liked')
+        likes.innerHTML = `${
+          likesCount + likedContent.length
+        }    <i class="fa-solid fa-heart"></i>`
+      })
+    })
 
     likes.innerHTML = `${likesCount}    <i class="fa-solid fa-heart"></i>`
 
