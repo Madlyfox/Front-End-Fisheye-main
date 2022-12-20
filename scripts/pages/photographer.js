@@ -8,7 +8,7 @@ const id = urlSearchParams.get('id')
 
 const dataJson = '../data/photographers.json'
 const mainSection = document.querySelector('.photograph-main')
-
+// get all pgotographers
 async function getPhotographer() {
   const response = await fetch(dataJson)
   const data = await response.json()
@@ -21,6 +21,7 @@ async function getPhotographer() {
     photographerById,
   }
 }
+
 // Display Info
 async function displayData(photographerById) {
   const headerSection = document.querySelector('.photograph-header')
@@ -49,6 +50,7 @@ async function getMedia() {
 
 function sortMedia(medias, sortBy) {
   mainSection.innerHTML = ''
+  // sort by const 'sortBy'
   if (sortBy === '1') {
     medias.sort((a, b) => (a.likes < b.likes ? 1 : -1))
     medias.forEach((media) => {
@@ -101,15 +103,20 @@ async function displayMedia(medias) {
 
   const prevBtn = document.querySelector('.prev')
   const nextBtn = document.querySelector('.next')
-  // close lightbox
-  closePreview.onclick = () => {
-    previewBox.classList.remove('show')
-  }
+
   // lightbox launcher
   for (let i = 0; i < mediaCard.length; i += 1) {
     let newIndex = i
     insider.innerHTML = ''
 
+    //  lightbox trigger
+    // simulate click on keypress
+    mediaCard[newIndex].firstChild.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        mediaCard[newIndex].firstChild.click()
+      }
+    })
+    // on click trigger
     mediaCard[newIndex].firstChild.onclick = () => {
       if (newIndex <= 0) {
         prevBtn.style.display = 'none'
@@ -119,10 +126,13 @@ async function displayMedia(medias) {
       if (newIndex === mediaCard.length - 1) {
         nextBtn.style.display = 'none'
       }
+      // launch lightbox
       function preview() {
         insider.innerHTML = mediaCard[newIndex].innerHTML
       }
+      //  lightbox controls
       function lightboxControl() {
+        // keyboard controls handler
         window.addEventListener('keydown', (e) => {
           switch (e.key) {
             case 'ArrowLeft':
@@ -145,6 +155,8 @@ async function displayMedia(medias) {
               break
             case 'Escape':
               previewBox.classList.remove('show')
+              insider.innerHTML = ''
+              newIndex = i
               break
             default:
           }
@@ -152,6 +164,13 @@ async function displayMedia(medias) {
           // Annuler l'action par défaut pour éviter qu'elle ne soit traitée deux fois.
         })
       }
+      // close lightbox
+      closePreview.onclick = () => {
+        previewBox.classList.remove('show')
+        insider.innerHTML = ''
+        newIndex = i
+      }
+      // prev media
       prevBtn.onclick = () => {
         if (newIndex === 0) {
           prevBtn.style.display = 'none'
@@ -161,6 +180,7 @@ async function displayMedia(medias) {
           preview()
         }
       }
+      // next media
       nextBtn.onclick = () => {
         if (newIndex === mediaCard.length - 1) {
           nextBtn.style.display = 'none'
@@ -174,11 +194,6 @@ async function displayMedia(medias) {
       preview()
       previewBox.classList.add('show')
     }
-    mediaCard[newIndex].firstChild.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        mediaCard[newIndex].firstChild.click()
-      }
-    })
   }
 }
 
@@ -194,7 +209,7 @@ async function getLikes(medias) {
   }
 }
 
-// Display Likes
+// Display Like counter fixed bot
 
 async function displayLikeCounter(medias) {
   const infoSection = document.querySelector('.photograph-info')
@@ -217,6 +232,7 @@ async function init() {
   const { medias } = await getMedia()
   const { likesCount } = await getLikes(medias)
 
+  // live display
   displayData(photographerById)
   displayMedia(medias)
   displayLikeCounter(likesCount)

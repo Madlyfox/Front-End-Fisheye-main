@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 const dropdown = document.getElementById('myDropdown')
 const btn = document.querySelector('.dropbtn')
 const optionList = dropdown.querySelectorAll('a')
@@ -7,7 +5,8 @@ const select = document.querySelector('select')
 const chevron = document.createElement('i')
 chevron.setAttribute('class', 'fa-solid fa-chevron-down')
 
-// binding invisible select on dropdown
+// get value from dropdown
+
 function selectValue() {
   const e = new Event('change')
 
@@ -42,13 +41,15 @@ function selectValue() {
 }
 selectValue()
 
-// utils functions
+// binding select value on dropdown value for sorting
+
 function setValue(e) {
   select.value = e
 
   selectValue()
 }
 
+// display dropdown
 function showDropdown() {
   dropdown.classList.toggle('show')
   chevron.classList.remove('fa-chevron-down')

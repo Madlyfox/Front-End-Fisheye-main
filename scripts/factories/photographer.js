@@ -1,9 +1,11 @@
 // All factories
+
+//  photographer factory
 function photographerFactory(data) {
   const { id, name, portrait, city, country, tagline, price } = data
 
   const picture = `assets/photographers/${portrait}`
-
+  // creation of elements
   function getUserCardDOM() {
     const a = document.createElement('a')
     a.setAttribute('href', `photographer.html?id=${id}`)
@@ -31,12 +33,13 @@ function photographerFactory(data) {
   }
   return { name, picture, getUserCardDOM }
 }
+//  profi factory
 function profilFactory(data) {
   const { name, portrait, city, country, tagline, price } = data
 
   const picture = `assets/photographers/${portrait}`
   const infoBox = document.querySelector('.photograph-info')
-
+  // creation of elements
   function getUserHeaderDOM() {
     const section = document.createElement('section')
     const info = document.createElement('div')
@@ -70,6 +73,7 @@ function profilFactory(data) {
   }
   return { name, picture, getUserHeaderDOM }
 }
+//  media on profil factory
 function mediaFactory(data) {
   const { id, photographerId, title, image, video, date, price } = data
   const { likes } = data
@@ -77,12 +81,11 @@ function mediaFactory(data) {
   const vdoSrc = `assets/photos/${photographerId}/${video}`
 
   const svgNs = 'http://www.w3.org/2000/svg'
-
+  // creation of elements
   function getUserMediaDOM() {
     const card = document.createElement('a')
     card.setAttribute('class', 'card')
     card.setAttribute('data-id', id)
-
     if (image) {
       const img = document.createElement('img')
       img.setAttribute('src', imgSrc)
@@ -117,7 +120,7 @@ function mediaFactory(data) {
     const heart = document.createElement('i')
     heart.setAttribute('class', 'far fa-heart')
     heart.setAttribute('tabIndex', '0')
-
+    // like handler
     heart.addEventListener('click', (e) => {
       if (p.classList.contains('liked')) {
         p.classList.remove('liked')
@@ -130,7 +133,7 @@ function mediaFactory(data) {
         p.innerHTML = likes + 1
       }
     })
-
+    // like handler keyboard controle
     heart.addEventListener('keypress', (e) => {
       switch (e.key) {
         case 'Enter':
@@ -161,13 +164,16 @@ function mediaFactory(data) {
 
   return { title, likes, getUserMediaDOM }
 }
+// info fixed bot on profil factory
 function infoFactory(data) {
   const likesCount = data
+  // creation of elements
   function getUserInfoDOM() {
     const info = document.createElement('div')
     const likes = document.createElement('p')
     const p = document.createElement('p')
     const content = document.querySelectorAll('.fa-heart')
+    // live incrementation
     content.forEach((e) => {
       e.addEventListener('click', () => {
         const likedContent = document.querySelectorAll('.fa-heart.liked')
@@ -186,8 +192,10 @@ function infoFactory(data) {
 
   return { likesCount, getUserInfoDOM }
 }
+// Lightobx factory
 function modalFactory(data) {
   const { name } = data
+  // creation of elements
   function getUserModalDOM() {
     const modal = document.createElement('div')
     modal.setAttribute('class', 'modal')
