@@ -1,5 +1,5 @@
 const dataJson = '../data/photographers.json'
-
+// get photographer from json
 async function getPhotographers() {
   const response = await fetch(dataJson)
   const data = await response.json()
