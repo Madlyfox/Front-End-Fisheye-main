@@ -1,7 +1,5 @@
 const modal = document.getElementById('contact_modal')
 
-// utils functions
-
 // display modal
 function displayModal() {
   modal.style.display = 'block'
@@ -14,7 +12,6 @@ function closeModal() {
 const previewBox = document.querySelector('.preview-box')
 
 // modal controls
-
 modal.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'Escape':

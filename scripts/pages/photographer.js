@@ -82,19 +82,6 @@ function sortMedia(medias, sortBy) {
       mainSection.appendChild(userMediaDOM)
     })
   }
-}
-// Display Sorted Media
-
-async function displayMedia(medias) {
-  const sortBy = document.querySelector('select')
-
-  sortMedia(medias, sortBy.value)
-  // Sort Medias
-
-  sortBy.addEventListener('change', () => {
-    sortMedia(medias, sortBy.value)
-  })
-
   // LightBox
   const mediaCard = document.querySelectorAll('.card')
   const insider = document.getElementById('inside')
@@ -105,6 +92,9 @@ async function displayMedia(medias) {
   const nextBtn = document.querySelector('.next')
 
   // lightbox launcher
+  function preview(e) {
+    insider.innerHTML = mediaCard[e].innerHTML
+  }
   for (let i = 0; i < mediaCard.length; i += 1) {
     let newIndex = i
     insider.innerHTML = ''
@@ -126,10 +116,7 @@ async function displayMedia(medias) {
       if (newIndex === mediaCard.length - 1) {
         nextBtn.style.display = 'none'
       }
-      // launch lightbox
-      function preview() {
-        insider.innerHTML = mediaCard[newIndex].innerHTML
-      }
+
       //  lightbox controls
       function lightboxControl() {
         // keyboard controls handler
@@ -177,7 +164,7 @@ async function displayMedia(medias) {
         } else {
           nextBtn.style.display = 'block'
           newIndex -= 1 // decrement newIndexvalue
-          preview()
+          preview(newIndex)
         }
       }
       // next media
@@ -187,16 +174,27 @@ async function displayMedia(medias) {
         } else {
           prevBtn.style.display = 'block'
           newIndex += 1 // increment newIndexvalue
-          preview()
+          preview(newIndex)
         }
       }
       lightboxControl()
-      preview()
+      preview(newIndex)
       previewBox.classList.add('show')
     }
   }
 }
+// Display Sorted Media
 
+async function displayMedia(medias) {
+  const sortBy = document.querySelector('select')
+
+  sortMedia(medias, sortBy.value)
+  // Sort Medias
+
+  sortBy.addEventListener('change', () => {
+    sortMedia(medias, sortBy.value)
+  })
+}
 // Get total Likes
 async function getLikes(medias) {
   const likesCount = medias
@@ -209,7 +207,7 @@ async function getLikes(medias) {
   }
 }
 
-// Display Like counter fixed bot
+// Display Like counter
 
 async function displayLikeCounter(medias) {
   const infoSection = document.querySelector('.photograph-info')

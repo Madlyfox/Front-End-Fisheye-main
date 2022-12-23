@@ -93,6 +93,7 @@ function mediaFactory(data) {
       img.setAttribute('alt', title)
       img.classList.add('media')
       img.setAttribute('tabindex', 0)
+
       card.appendChild(img)
     }
     if (video) {
