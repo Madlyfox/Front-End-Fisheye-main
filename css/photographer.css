@@ -1,3 +1,21 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+}
+
+h1 {
+  color: #901c1c;
+  margin-right: 100px;
+}
+
+.logo {
+  height: 50px;
+  margin-left: 100px;
+}
+
 #contact_modal {
   display: none;
   height: 100%;
@@ -36,7 +54,7 @@
 .photograph-header section img {
   height: 200px;
   width: 200px;
-  border-radius: 50%;
+  border-radius: 200px;
   object-fit: cover;
 }
 .photograph-header section p {
@@ -384,4 +402,137 @@ select {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
   display: block;
+}
+@media (max-width: 1500px) {
+  .photograph-main {
+    justify-content: space-evenly;
+  }
+}
+@media (max-width: 950px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px 50px;
+  }
+  main {
+    display: flex;
+    flex-flow: column;
+  }
+  .photograph-header {
+    width: 100%;
+    flex-flow: column wrap;
+    align-items: baseline;
+    margin: 0;
+  }
+  .photograph-header section {
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    padding: 0;
+    max-height: 300px;
+  }
+  section .info {
+    margin: 0;
+  }
+  .photograph-main {
+    justify-content: center;
+  }
+  #inside {
+    padding: 45px;
+  }
+  #inside,
+  img {
+    object-fit: contain;
+  }
+  .preview-box .close {
+    top: 5%;
+  }
+}
+@media (max-width: 650px) {
+  header {
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+  }
+  header .logo {
+    margin: 0;
+  }
+  .photograph-header {
+    height: 500px;
+  }
+  .photograph-header section {
+    max-height: 100%;
+    flex-direction: column;
+  }
+
+  section img {
+    order: 1;
+  }
+  #inside img {
+    height: auto;
+    max-height: 650px;
+  }
+  #inside video {
+    height: auto;
+    max-height: 650px;
+  }
+  .info {
+    order: 2;
+  }
+  .contact_button {
+    order: 3;
+  }
+  .modal {
+    width: 70%;
+  }
+  .modal header {
+    padding: 0;
+  }
+  .modal header h2 {
+    font-size: 30px;
+  }
+  form fieldset {
+    margin-top: 20px;
+  }
+}
+@media (max-width: 380px) {
+  header {
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  .logo {
+    width: 95px;
+    height: 25px;
+  }
+
+  main {
+    justify-content: center;
+    align-items: center;
+  }
+  .photograph-main {
+    padding: 0;
+  }
+  .card {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+  }
+  .card_footer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+  }
+  .selector {
+    margin: 50px 0;
+  }
+  .card img {
+    max-width: 250px;
+    margin: 0;
+  }
+  .card video {
+    width: 250px;
+    margin: 0;
+  }
 }
